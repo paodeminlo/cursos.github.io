@@ -1,218 +1,176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CodeStart — Aprenda a Criar Sites do Zero</title>
-<meta name="description" content="Aprenda a criar sites profissionais do zero com HTML, CSS e JavaScript. Curso prático com projeto final.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CodeStart — Curso Completo de Programação Web</title>
 <style>
-:root{
-  --bg:#070b14;--bg2:#0b1120;--card:#10182a;--line:#202d47;
-  --text:#f7f9ff;--muted:#9aa8bd;--primary:#6757ff;--primary2:#806fff;
-  --cyan:#36e1cc;--green:#39d98a;--yellow:#ffd166;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 80% 0%,#18204c 0,transparent 34%),linear-gradient(180deg,var(--bg),#080e19 55%,#060a12);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-a{text-decoration:none;color:inherit}
-.container{width:min(1120px,92%);margin:auto}
-nav{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
-.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:950;font-size:21px;letter-spacing:-.5px}.logo span{color:var(--cyan)}
-.navlinks{display:flex;gap:24px;color:#b8c3d6;font-size:14px}.navlinks a:hover{color:#fff}
-.navbtn{padding:10px 15px;background:#fff;color:#111;border-radius:10px;font-weight:800;font-size:13px}
-
-.hero{padding:82px 0 60px;display:grid;grid-template-columns:1.04fr .96fr;gap:50px;align-items:center}
-.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #30416a;background:#101a33;color:#aeb8ff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:850}
-.eyebrow i{width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan)}
-h1{font-size:clamp(40px,6vw,70px);line-height:1.01;letter-spacing:-2.8px;margin:18px 0}
-.grad{background:linear-gradient(90deg,#fff 20%,#aaa1ff 65%,#4de6d5);-webkit-background-clip:text;color:transparent}
-.hero p{font-size:18px;color:var(--muted);max-width:650px}
-.cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:27px}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:13px;font-weight:900;border:1px solid var(--line);cursor:pointer}
-.btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary2));border:0;box-shadow:0 14px 35px #6757ff38}
-.btn.secondary{background:#111b2e;color:#dce5f5}
-.guarantee{font-size:12px;color:#8d9ab0;margin-top:13px}
-.hero-visual{position:relative}
-.glow{position:absolute;inset:15% -10% -10%;background:#6557ff2a;filter:blur(70px);z-index:-1}
-.mockup{border:1px solid #2b3a59;background:#0d1525;border-radius:24px;overflow:hidden;box-shadow:0 30px 100px #0008}
-.mockbar{height:42px;border-bottom:1px solid #24324a;display:flex;align-items:center;padding:0 15px;gap:6px}.dot{width:9px;height:9px;border-radius:50%;background:#44516a}
-.mockimg{height:360px;background:linear-gradient(135deg,#111a34,#1b1640);position:relative;overflow:hidden}
-.mockimg img{width:100%;height:100%;object-fit:cover;opacity:.72}
-.mockoverlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent,#070b14d9)}
-.mocktext{position:absolute;left:24px;right:24px;bottom:24px}.mocktext small{color:#aeb8ff;font-weight:800}.mocktext h3{font-size:27px;line-height:1.05;margin:7px 0}
-
-.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:12px 0 75px}
-.proof .item{border:1px solid var(--line);background:#0d1627;border-radius:16px;padding:19px}.item b{font-size:22px}.item span{display:block;color:var(--muted);font-size:13px}
-
-.section{padding:72px 0}.section.center{text-align:center}.section h2{font-size:38px;letter-spacing:-1.3px;line-height:1.1;margin:0 0 12px}.lead{color:var(--muted);max-width:700px;margin:0 auto}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
-.card{background:linear-gradient(145deg,#10192b,#0b1423);border:1px solid var(--line);border-radius:19px;padding:24px}.icon{width:42px;height:42px;display:grid;place-items:center;background:#171e42;border-radius:12px;font-size:20px}.card h3{margin:14px 0 7px}.card p{margin:0;color:var(--muted);font-size:14px}
-
-.modules{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:30px}.module{display:flex;gap:15px;align-items:flex-start}.num{font-weight:950;color:#858bff;font-size:12px;min-width:55px}.module p{color:var(--muted);margin:4px 0 0;font-size:14px}
-
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}.showcase img{width:100%;height:360px;object-fit:cover;border-radius:22px;border:1px solid var(--line)}.check{margin:13px 0;color:#cdd6e5}.check b{color:var(--green)}
-
-.offer{position:relative;overflow:hidden;background:linear-gradient(145deg,#171b49,#0d1730);border:1px solid #3b4385;border-radius:28px;padding:40px;text-align:center;box-shadow:0 30px 100px #0006}.offer:before{content:"";position:absolute;width:300px;height:300px;background:#6c5cff32;filter:blur(70px);top:-130px;right:-90px}.offer>*{position:relative}
-.offerbadge{display:inline-block;background:#252a65;color:#bfc4ff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:900}
-.old{text-decoration:line-through;color:#78859a;font-size:15px;margin-top:22px}.price{font-size:57px;font-weight:950;letter-spacing:-2px;margin:0}.price small{font-size:17px;letter-spacing:0}.install{color:#b8c4d8}.offer .btn{width:min(500px,100%);margin-top:18px;font-size:16px}
-.secure{font-size:12px;color:#9aa8bd;margin-top:12px}
-
-.bonus{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:30px}.bonus .card{border-color:#2a3961}
-.faq{max-width:800px;margin:30px auto}.faq details{background:#0d1627;border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:17px 19px}.faq summary{cursor:pointer;font-weight:800}.faq p{color:var(--muted);margin-bottom:0}
-
-.final{padding:85px 0}.finalbox{text-align:center;max-width:850px;margin:auto}.finalbox h2{font-size:44px;line-height:1.05}.finalbox p{color:var(--muted);font-size:17px}
-
-footer{border-top:1px solid var(--line);padding:32px 0;color:#77869e;font-size:12px}
-@media(max-width:850px){
- .navlinks{display:none}.hero,.showcase{grid-template-columns:1fr}.hero{padding-top:55px}.mockimg{height:290px}
- .features,.bonus{grid-template-columns:1fr}.modules{grid-template-columns:1fr}.proof{grid-template-columns:1fr}
- .section{padding:55px 0}.offer{padding:28px 18px}.price{font-size:48px}
-}
+:root{--bg:#070b14;--card:#101827;--card2:#0c1320;--text:#eef4ff;--muted:#9eabc0;--accent:#6d7cff;--accent2:#22d3ee;--ok:#35d07f;--line:#202c40}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#070b14,#0a1020);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:inherit}.wrap{max-width:1100px;margin:auto;padding:0 20px}.nav{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.navin{height:64px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:21px}.logo span{color:var(--accent2)}.nav a{text-decoration:none;color:var(--muted);margin-left:20px;font-size:14px}.btn{display:inline-block;border:0;border-radius:12px;padding:13px 18px;font-weight:800;text-decoration:none;cursor:pointer;background:linear-gradient(135deg,var(--accent),#8d62ff);color:white;box-shadow:0 10px 30px #5d63ff22}.btn.secondary{background:#172235;border:1px solid var(--line);box-shadow:none}.hero{padding:80px 0 55px;text-align:center}.tag{display:inline-block;padding:7px 11px;border:1px solid #2b3852;border-radius:999px;color:#b8c7ff;background:#111a2b;font-size:13px}.hero h1{font-size:clamp(38px,7vw,70px);line-height:1.02;margin:18px auto;max-width:850px}.hero h1 span{color:#7c8cff}.hero p{max-width:700px;margin:0 auto 25px;color:var(--muted);font-size:18px;line-height:1.65}.price{font-size:42px;font-weight:900;margin:18px 0 4px}.small{color:var(--muted);font-size:13px}.section{padding:55px 0}.section h2{text-align:center;font-size:34px;margin:0 0 10px}.sub{text-align:center;color:var(--muted);margin:0 auto 30px;max-width:700px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(180deg,#111b2b,#0d1522);border:1px solid var(--line);border-radius:18px;padding:22px}.card h3{margin-top:0}.card p,.card li{color:var(--muted);line-height:1.55}.modules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.module{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px}.num{min-width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#1c2740;color:#9eaaff;font-weight:900}.offer{max-width:700px;margin:auto;text-align:center;border:1px solid #3b4770;background:radial-gradient(circle at top,#182244,#0e1523);padding:35px;border-radius:24px}.pixbox{margin:20px auto;padding:20px;background:#0a111d;border:1px solid var(--line);border-radius:18px;max-width:650px}.pixcode{word-break:break-all;color:#b7c4d9;font-size:12px;line-height:1.5;background:#080d16;border-radius:10px;padding:13px;text-align:left}.course{display:none}.course.active{display:block}.coursebar{position:sticky;top:64px;z-index:10;background:rgba(10,16,30,.96);border-bottom:1px solid var(--line);padding:10px 0}.coursebarin{display:flex;justify-content:space-between;gap:15px;align-items:center}.progress{height:8px;background:#172236;border-radius:99px;overflow:hidden;flex:1}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0}.lesson{max-width:850px;margin:28px auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:25px}.lesson h2{text-align:left;margin-top:0}.lesson p,.lesson li{color:#b6c2d4;line-height:1.7}.code{position:relative;background:#060a11;border:1px solid #1d293c;border-radius:12px;padding:18px;overflow:auto;color:#d7e4ff;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.6}.copy{position:absolute;right:10px;top:10px;background:#1a2740;color:#cdd7e8;border:0;border-radius:8px;padding:7px 9px;cursor:pointer}.lessonnav{display:flex;justify-content:space-between;gap:10px;margin-top:25px}.locked{opacity:.6}.login{max-width:520px;margin:35px auto;padding:25px;background:var(--card);border:1px solid var(--line);border-radius:20px}.input{width:100%;padding:13px;border-radius:10px;border:1px solid #2a3850;background:#080f1b;color:white;margin:8px 0 12px}.notice{padding:13px;border-radius:12px;background:#111b2d;color:#b7c4d9;font-size:13px;line-height:1.5}.footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);text-align:center}.hide{display:none!important}@media(max-width:760px){.grid,.modules{grid-template-columns:1fr}.nav a{display:none}.hero{padding-top:55px}.hero p{font-size:16px}.coursebarin{flex-wrap:wrap}.progress{order:3;flex-basis:100%}}
 </style>
 </head>
 <body>
-<nav>
-<div class="container nav">
-<a class="logo" href="#">Code<span>Start</span></a>
-<div class="navlinks"><a href="#conteudo">O que você aprende</a><a href="#modulos">Módulos</a><a href="#oferta">Oferta</a><a href="#faq">Dúvidas</a></div>
-<a class="navbtn" href="#oferta">Quero aprender</a>
-</div>
-</nav>
+<header class="nav"><div class="wrap navin"><div class="logo">Code<span>Start</span></div><nav><a href="#conteudo">Conteúdo</a><a href="#pagamento">Pagamento</a><a href="#curso">Curso</a></nav></div></header>
 
-<header class="container hero">
-<div>
-<div class="eyebrow"><i></i> CURSO ONLINE • DO ZERO AO PRIMEIRO SITE</div>
-<h1>Aprenda a criar <span class="grad">sites profissionais</span> do zero.</h1>
-<p>Domine HTML, CSS e JavaScript através de aulas práticas, exemplos de código e um projeto completo. Mesmo que você nunca tenha programado.</p>
-<div class="cta">
-<a class="btn primary" href="#oferta">QUERO COMEÇAR AGORA →</a>
-<a class="btn secondary" href="#conteudo">Ver conteúdo</a>
-</div>
-<div class="guarantee">✓ Acesso ao conteúdo • ✓ Estudo no seu ritmo • ✓ Projeto prático</div>
-</div>
-<div class="hero-visual">
-<div class="glow"></div>
-<div class="mockup">
-<div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-<div class="mockimg">
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85" alt="Programação em computador">
-<div class="mockoverlay"></div>
-<div class="mocktext"><small>CODESTART</small><h3>Do primeiro código ao seu próprio site.</h3></div>
-</div>
-</div>
-</div>
-</header>
+<main id="venda">
+<section class="hero"><div class="wrap">
+<div class="tag">CURSO COMPLETO • DO ZERO AO PRIMEIRO SITE</div>
+<h1>Aprenda a criar <span>sites de verdade</span> usando HTML, CSS e JavaScript.</h1>
+<p>Um curso direto ao ponto para começar do zero, praticar com projetos e entender como as páginas da web são construídas.</p>
+<a class="btn" href="#pagamento">Quero começar agora</a>
+<div class="price">R$ 29,90</div><div class="small">Pagamento via Pix • acesso liberado após confirmação</div>
+</div></section>
 
-<main>
-<section class="container proof">
-<div class="item"><b>HTML</b><span>Estruture páginas corretamente</span></div>
-<div class="item"><b>CSS</b><span>Crie layouts bonitos e responsivos</span></div>
-<div class="item"><b>JavaScript</b><span>Adicione interatividade ao site</span></div>
-</section>
+<section class="section"><div class="wrap"><h2>O que você vai aprender</h2><p class="sub">Você vai sair da base até conseguir montar uma página completa e publicar seu projeto.</p>
+<div class="grid">
+<div class="card"><h3>HTML</h3><p>Estrutura, textos, links, imagens, formulários e organização semântica.</p></div>
+<div class="card"><h3>CSS</h3><p>Cores, espaçamento, layouts, Flexbox, Grid e responsividade.</p></div>
+<div class="card"><h3>JavaScript</h3><p>Variáveis, funções, eventos, DOM e interações na página.</p></div>
+</div></div></section>
 
-<section id="conteudo" class="section">
-<div class="container">
-<div class="section center"><h2>O que você vai aprender</h2><p class="lead">Um caminho organizado para sair do zero e entender como um site realmente é construído.</p></div>
-<div class="features">
-<div class="card"><div class="icon">⌨️</div><h3>HTML na prática</h3><p>Aprenda a criar a estrutura de páginas, títulos, textos, imagens, links, botões e formulários.</p></div>
-<div class="card"><div class="icon">🎨</div><h3>CSS profissional</h3><p>Trabalhe com cores, fontes, espaçamento, Flexbox, Grid, responsividade e componentes.</p></div>
-<div class="card"><div class="icon">⚡</div><h3>JavaScript</h3><p>Entenda lógica, funções, eventos e DOM para fazer seus sites reagirem às ações do usuário.</p></div>
-</div>
-</div>
-</section>
-
-<section id="modulos" class="section" style="background:#090f1c">
-<div class="container">
-<div class="section center"><h2>Conteúdo do curso</h2><p class="lead">12 módulos em uma sequência pensada para quem está começando.</p></div>
+<section class="section" id="conteudo"><div class="wrap"><h2>Conteúdo do curso</h2><p class="sub">12 módulos com exemplos práticos.</p>
 <div class="modules">
-<div class="card module"><span class="num">01</span><div><h3>Como a Web funciona</h3><p>Navegador, servidor, internet, arquivos e páginas.</p></div></div>
-<div class="card module"><span class="num">02</span><div><h3>HTML do zero</h3><p>Tags, estrutura, textos, links, imagens e botões.</p></div></div>
-<div class="card module"><span class="num">03</span><div><h3>HTML semântico</h3><p>Organização profissional e acessível.</p></div></div>
-<div class="card module"><span class="num">04</span><div><h3>CSS essencial</h3><p>Cores, fontes, box model, bordas e espaçamento.</p></div></div>
-<div class="card module"><span class="num">05</span><div><h3>Flexbox e Grid</h3><p>Criação de layouts modernos.</p></div></div>
-<div class="card module"><span class="num">06</span><div><h3>Responsividade</h3><p>Sites que funcionam no celular e computador.</p></div></div>
-<div class="card module"><span class="num">07</span><div><h3>JavaScript</h3><p>Variáveis, funções, condições e lógica.</p></div></div>
-<div class="card module"><span class="num">08</span><div><h3>DOM e eventos</h3><p>Botões, interações e alterações na página.</p></div></div>
-<div class="card module"><span class="num">09</span><div><h3>Formulários</h3><p>Inputs, validações e interação.</p></div></div>
-<div class="card module"><span class="num">10</span><div><h3>Projeto completo</h3><p>Construção de uma landing page.</p></div></div>
-<div class="card module"><span class="num">11</span><div><h3>Git e publicação</h3><p>Versionamento e primeiros passos para publicar.</p></div></div>
-<div class="card module"><span class="num">12</span><div><h3>Próximos passos</h3><p>Como continuar evoluindo e criar portfólio.</p></div></div>
-</div>
-</div>
-</section>
+<div class="module"><b class="num">01</b><div><b>Como a web funciona</b><p>Sites, navegador, servidor e arquivos.</p></div></div>
+<div class="module"><b class="num">02</b><div><b>Primeiros passos com HTML</b><p>Tags, estrutura e conteúdo.</p></div></div>
+<div class="module"><b class="num">03</b><div><b>HTML semântico</b><p>Estruture páginas de forma organizada.</p></div></div>
+<div class="module"><b class="num">04</b><div><b>CSS do zero</b><p>Estilos, cores, fontes e espaçamento.</p></div></div>
+<div class="module"><b class="num">05</b><div><b>Flexbox</b><p>Crie layouts modernos.</p></div></div>
+<div class="module"><b class="num">06</b><div><b>Grid e responsividade</b><p>Sites adaptáveis para celular e PC.</p></div></div>
+<div class="module"><b class="num">07</b><div><b>JavaScript básico</b><p>Comece a programar interações.</p></div></div>
+<div class="module"><b class="num">08</b><div><b>DOM e eventos</b><p>Faça a página reagir ao usuário.</p></div></div>
+<div class="module"><b class="num">09</b><div><b>Formulários</b><p>Inputs, validação e boas práticas.</p></div></div>
+<div class="module"><b class="num">10</b><div><b>Projeto completo</b><p>Monte uma landing page do zero.</p></div></div>
+<div class="module"><b class="num">11</b><div><b>GitHub Pages</b><p>Aprenda uma forma simples de publicar.</p></div></div>
+<div class="module"><b class="num">12</b><div><b>Próximos passos</b><p>Como continuar evoluindo na programação.</p></div></div>
+</div></div></section>
 
-<section class="section">
-<div class="container showcase">
-<div><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1000&q=85" alt="Desenvolvimento de um site"></div>
-<div><h2>Você aprende construindo.</h2><p class="lead" style="margin:0">A ideia não é decorar códigos. É entender para que cada tecnologia serve e usar o conhecimento em projetos.</p>
-<p class="check">✓ <b>Projeto final:</b> landing page completa</p>
-<p class="check">✓ <b>Prática:</b> exemplos de código para testar</p>
-<p class="check">✓ <b>Responsivo:</b> aprenda a adaptar para celular</p>
-<p class="check">✓ <b>Base sólida:</b> prepare-se para tecnologias mais avançadas</p></div>
+<section class="section" id="pagamento"><div class="wrap"><div class="offer">
+<h2>Comece por R$ 29,90</h2><p class="sub">Faça o pagamento pelo Pix e depois solicite sua liberação.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/2s4bg2/6ac6bd7f-8e0e-4c1f-b8e7-c5db1ce5b45f">Pagar R$ 29,90 via Pix</a>
+<div class="pixbox"><b>Pix Copia e Cola</b><p class="small">Toque no botão para copiar.</p>
+<div class="pixcode" id="pix">00020126580014BR.GOV.BCB.PIX01363461c022-2272-461c-8c6f-7484c6a45d99520400005303986540529.905802BR5924Joao Pedro Dias da Silva6009SAO PAULO62140510rF7cN0p47R630428B2</div>
+<button class="btn secondary" onclick="copyPix()">Copiar Pix</button>
 </div>
-</section>
+<div class="notice"><b>Como funciona:</b> após pagar, você envia o comprovante e o acesso pode ser liberado manualmente pelo administrador. Esta página não confirma o pagamento automaticamente.</div>
+<button class="btn secondary" style="margin-top:15px" onclick="showRequest()">Já paguei — solicitar acesso</button>
+</div></div></section>
 
-<section class="section">
-<div class="container">
-<div class="section center"><h2>🎁 O que você recebe</h2><p class="lead">Além das aulas, o material foi pensado para facilitar sua prática.</p></div>
-<div class="bonus">
-<div class="card"><h3>📖 Guia prático</h3><p>Conteúdo organizado em módulos para estudar sem se perder.</p></div>
-<div class="card"><h3>💻 Exemplos de código</h3><p>Trechos prontos para entender, testar e modificar.</p></div>
-<div class="card"><h3>🚀 Projeto final</h3><p>Um projeto completo para aplicar tudo que aprendeu.</p></div>
-</div>
-</div>
-</section>
-
-<section id="oferta" class="section">
-<div class="container">
-<div class="offer">
-<span class="offerbadge">OFERTA DE LANÇAMENTO</span>
-<h2>Comece hoje a criar seus próprios sites.</h2>
-<p class="lead">Tenha acesso ao curso CodeStart e siga o passo a passo para aprender programação web.</p>
-<div class="old">De R$ 59,90</div>
-<div class="price">R$ 29<small>,90</small></div>
-<div class="install">Pagamento único</div>
-<a class="btn primary" href="COLE_AQUI_SEU_LINK_DA_KIWIFY" onclick="return checkout(event)">QUERO GARANTIR MEU ACESSO →</a>
-<div class="secure">🔒 Pagamento processado com segurança • Acesso após a confirmação</div>
-</div>
-</div>
-</section>
-
-<section id="faq" class="section">
-<div class="container">
-<div class="section center"><h2>Perguntas frequentes</h2><p class="lead">As principais dúvidas antes de começar.</p></div>
-<div class="faq">
-<details><summary>Preciso saber programar?</summary><p>Não. O curso começa pelos fundamentos e foi organizado para iniciantes.</p></details>
-<details><summary>Preciso ter um computador?</summary><p>Para praticar programação com mais conforto, um computador é recomendado. Você também pode acompanhar a parte teórica pelo celular.</p></details>
-<details><summary>O curso ensina HTML, CSS e JavaScript?</summary><p>Sim. Essas são as três tecnologias centrais do curso.</p></details>
-<details><summary>Vou criar um site durante o curso?</summary><p>Sim. O projeto final reúne os conhecimentos aprendidos ao longo dos módulos.</p></details>
-<details><summary>Por quanto tempo terei acesso?</summary><p>Defina aqui a regra de acesso que você oferecerá na plataforma de pagamento.</p></details>
-</div>
-</div>
-</section>
-
-<section class="final">
-<div class="container finalbox">
-<h2>Seu primeiro site pode começar com uma única linha de código.</h2>
-<p>Comece pelos fundamentos, pratique e evolua um projeto de cada vez.</p>
-<a class="btn primary" href="#oferta">QUERO COMEÇAR →</a>
-</div>
-</section>
+<section class="section" id="solicitar" style="display:none"><div class="wrap"><div class="login">
+<h2>Solicitar acesso</h2><p class="sub">Preencha os dados abaixo e envie o comprovante ao administrador pelo canal combinado.</p>
+<input class="input" id="nome" placeholder="Seu nome">
+<input class="input" id="contato" placeholder="Seu WhatsApp ou e-mail">
+<textarea class="input" id="comprovante" rows="4" placeholder="Cole aqui uma observação sobre o pagamento"></textarea>
+<button class="btn" onclick="requestAccess()">Enviar solicitação</button>
+<p id="reqmsg" class="notice" style="margin-top:15px"></p>
+</div></div></section>
 </main>
 
-<footer><div class="container">© 2026 CodeStart. Todos os direitos reservados. • Esta página é uma apresentação do curso.</div></footer>
-
-<script>
-function checkout(e){
-  const href=e.currentTarget.getAttribute("href");
-  if(href==="COLE_AQUI_SEU_LINK_DA_KIWIFY"){
-    e.preventDefault();
-    alert("Coloque aqui o link do seu checkout da Kiwify. No código, procure por COLE_AQUI_SEU_LINK_DA_KIWIFY e substitua pelo seu link.");
-    return false;
-  }
-  return true;
+<section id="curso" class="course">
+<div class="coursebar"><div class="wrap coursebarin"><b>Área do aluno</b><span id="pct">0% concluído</span><div class="progress"><i id="bar"></i></div></div></div>
+<div class="wrap">
+<div class="lesson" id="l1"><h2>Módulo 1 — Como a web funciona</h2><p>Um site normalmente é formado por arquivos que o navegador interpreta. HTML organiza o conteúdo, CSS cuida da aparência e JavaScript adiciona comportamento.</p><ul><li>HTML = estrutura</li><li>CSS = visual</li><li>JavaScript = interação</li></ul><button class="btn" onclick="done(1)">Concluir módulo</button></div>
+<div class="lesson hide" id="l2"><h2>Módulo 2 — Primeiros passos com HTML</h2><p>Crie um arquivo chamado <b>index.html</b> e comece com uma estrutura básica.</p><pre class="code"><button class="copy" onclick="copyCode(this)">Copiar</button>&lt;!doctype html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Meu site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Olá, mundo!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><button class="btn" onclick="done(2)">Concluir módulo</button></div>
+<div class="lesson hide" id="l3"><h2>Módulo 3 — HTML semântico</h2><p>Use elementos que explicam o papel de cada parte da página, como header, nav, main, section, article e footer.</p><pre class="code">&lt;header&gt;Cabeçalho&lt;/header&gt;
+&lt;main&gt;
+  &lt;section&gt;Conteúdo principal&lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;Rodapé&lt;/footer&gt;</pre><button class="btn" onclick="done(3)">Concluir módulo</button></div>
+<div class="lesson hide" id="l4"><h2>Módulo 4 — CSS do zero</h2><p>CSS permite definir cores, tamanhos, margens, bordas e muito mais.</p><pre class="code">body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
 }
+h1 { font-size: 40px; }</pre><button class="btn" onclick="done(4)">Concluir módulo</button></div>
+<div class="lesson hide" id="l5"><h2>Módulo 5 — Flexbox</h2><p>Flexbox facilita o alinhamento de elementos em uma dimensão.</p><pre class="code">.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}</pre><button class="btn" onclick="done(5)">Concluir módulo</button></div>
+<div class="lesson hide" id="l6"><h2>Módulo 6 — Grid e responsividade</h2><p>Grid é ótimo para organizar blocos em linhas e colunas. Media queries permitem adaptar o layout a telas menores.</p><pre class="code">.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 700px) {
+  .cards { grid-template-columns: 1fr; }
+}</pre><button class="btn" onclick="done(6)">Concluir módulo</button></div>
+<div class="lesson hide" id="l7"><h2>Módulo 7 — JavaScript básico</h2><p>JavaScript permite armazenar valores e executar ações.</p><pre class="code">const nome = "Aluno";
+function saudacao() {
+  alert("Olá, " + nome + "!");
+}
+saudacao();</pre><button class="btn" onclick="done(7)">Concluir módulo</button></div>
+<div class="lesson hide" id="l8"><h2>Módulo 8 — DOM e eventos</h2><p>Com o DOM, JavaScript pode encontrar elementos e modificar a página.</p><pre class="code">const botao = document.querySelector("#meuBotao");
+botao.addEventListener("click", () =&gt; {
+  document.body.classList.toggle("escuro");
+});</pre><button class="btn" onclick="done(8)">Concluir módulo</button></div>
+<div class="lesson hide" id="l9"><h2>Módulo 9 — Formulários</h2><p>Formulários coletam informações. No lado do navegador, você pode validar campos antes de enviar.</p><pre class="code">&lt;form&gt;
+  &lt;input type="email" required&gt;
+  &lt;button&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</pre><button class="btn" onclick="done(9)">Concluir módulo</button></div>
+<div class="lesson hide" id="l10"><h2>Módulo 10 — Projeto completo</h2><p>Agora junte estrutura, estilo e comportamento em uma landing page.</p><pre class="code">&lt;h1&gt;Meu projeto&lt;/h1&gt;
+&lt;p&gt;Uma página criada por mim.&lt;/p&gt;
+&lt;button onclick="alert('Funcionou!')"&gt;Testar&lt;/button&gt;</pre><button class="btn" onclick="done(10)">Concluir módulo</button></div>
+<div class="lesson hide" id="l11"><h2>Módulo 11 — Publicando no GitHub Pages</h2><p>Uma página estática pode ser hospedada em serviços de páginas estáticas. No GitHub Pages, coloque seu index.html no repositório e ative Pages nas configurações.</p><button class="btn" onclick="done(11)">Concluir módulo</button></div>
+<div class="lesson hide" id="l12"><h2>Módulo 12 — Próximos passos</h2><p>Depois da base, avance para acessibilidade, APIs, frameworks, backend, bancos de dados e projetos reais.</p><div class="notice">Parabéns! Você concluiu a trilha inicial do CodeStart.</div><button class="btn" onclick="done(12)">Finalizar curso</button></div>
+<div class="lesson"><button class="btn secondary" onclick="backToSales()">Voltar para a página de vendas</button></div>
+</div>
+</section>
+<footer class="footer">CodeStart • Curso de Programação Web</footer>
+<script>
+const total=12;
+let completed=JSON.parse(localStorage.getItem("codestart_progress")||"[]");
+function update(){
+ const p=Math.round(completed.length/total*100);
+ document.getElementById("pct").textContent=p+"% concluído";
+ document.getElementById("bar").style.width=p+"%";
+ for(let i=1;i<=total;i++){
+   const el=document.getElementById("l"+i); if(el) el.classList.toggle("hide",i!==Math.min(completed.length+1,total));
+ }
+}
+function done(n){
+ if(!completed.includes(n)) completed.push(n);
+ completed.sort((a,b)=>a-b);
+ localStorage.setItem("codestart_progress",JSON.stringify(completed));
+ update();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function copyPix(){
+ navigator.clipboard.writeText(document.getElementById("pix").innerText).then(()=>alert("Pix Copia e Cola copiado!"));
+}
+function copyCode(btn){
+ const pre=btn.parentElement;
+ navigator.clipboard.writeText(pre.innerText.replace("Copiar","").trim()).then(()=>{btn.textContent="Copiado";setTimeout(()=>btn.textContent="Copiar",1200)});
+}
+function showRequest(){document.getElementById("solicitar").style.display="block";document.getElementById("solicitar").scrollIntoView({behavior:"smooth"})}
+function requestAccess(){
+ const n=document.getElementById("nome").value.trim(), c=document.getElementById("contato").value.trim();
+ const m=document.getElementById("reqmsg");
+ if(!n||!c){m.textContent="Preencha seu nome e contato.";return}
+ m.textContent="Solicitação registrada nesta página. O administrador ainda precisa confirmar o pagamento e liberar o acesso. Não envie senhas ou dados bancários.";
+}
+function openCourse(){
+ document.getElementById("venda").classList.add("hide");
+ document.getElementById("curso").classList.add("active");
+ document.querySelector(".footer").classList.add("hide");
+ update(); window.scrollTo(0,0);
+}
+function backToSales(){
+ document.getElementById("curso").classList.remove("active");
+ document.getElementById("venda").classList.remove("hide");
+ document.querySelector(".footer").classList.remove("hide");
+ window.scrollTo(0,0);
+}
+update();
 </script>
 </body>
   </html>
