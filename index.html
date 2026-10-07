@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeStart — Aprenda a Criar Sites do Zero</title>
+<meta name="description" content="Aprenda a criar sites profissionais do zero com HTML, CSS e JavaScript. Curso prático com projeto final.">
+<style>
+:root{
+  --bg:#070b14;--bg2:#0b1120;--card:#10182a;--line:#202d47;
+  --text:#f7f9ff;--muted:#9aa8bd;--primary:#6757ff;--primary2:#806fff;
+  --cyan:#36e1cc;--green:#39d98a;--yellow:#ffd166;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 80% 0%,#18204c 0,transparent 34%),linear-gradient(180deg,var(--bg),#080e19 55%,#060a12);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+nav{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:950;font-size:21px;letter-spacing:-.5px}.logo span{color:var(--cyan)}
+.navlinks{display:flex;gap:24px;color:#b8c3d6;font-size:14px}.navlinks a:hover{color:#fff}
+.navbtn{padding:10px 15px;background:#fff;color:#111;border-radius:10px;font-weight:800;font-size:13px}
+
+.hero{padding:82px 0 60px;display:grid;grid-template-columns:1.04fr .96fr;gap:50px;align-items:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #30416a;background:#101a33;color:#aeb8ff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:850}
+.eyebrow i{width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan)}
+h1{font-size:clamp(40px,6vw,70px);line-height:1.01;letter-spacing:-2.8px;margin:18px 0}
+.grad{background:linear-gradient(90deg,#fff 20%,#aaa1ff 65%,#4de6d5);-webkit-background-clip:text;color:transparent}
+.hero p{font-size:18px;color:var(--muted);max-width:650px}
+.cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:27px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:13px;font-weight:900;border:1px solid var(--line);cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary2));border:0;box-shadow:0 14px 35px #6757ff38}
+.btn.secondary{background:#111b2e;color:#dce5f5}
+.guarantee{font-size:12px;color:#8d9ab0;margin-top:13px}
+.hero-visual{position:relative}
+.glow{position:absolute;inset:15% -10% -10%;background:#6557ff2a;filter:blur(70px);z-index:-1}
+.mockup{border:1px solid #2b3a59;background:#0d1525;border-radius:24px;overflow:hidden;box-shadow:0 30px 100px #0008}
+.mockbar{height:42px;border-bottom:1px solid #24324a;display:flex;align-items:center;padding:0 15px;gap:6px}.dot{width:9px;height:9px;border-radius:50%;background:#44516a}
+.mockimg{height:360px;background:linear-gradient(135deg,#111a34,#1b1640);position:relative;overflow:hidden}
+.mockimg img{width:100%;height:100%;object-fit:cover;opacity:.72}
+.mockoverlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent,#070b14d9)}
+.mocktext{position:absolute;left:24px;right:24px;bottom:24px}.mocktext small{color:#aeb8ff;font-weight:800}.mocktext h3{font-size:27px;line-height:1.05;margin:7px 0}
+
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:12px 0 75px}
+.proof .item{border:1px solid var(--line);background:#0d1627;border-radius:16px;padding:19px}.item b{font-size:22px}.item span{display:block;color:var(--muted);font-size:13px}
+
+.section{padding:72px 0}.section.center{text-align:center}.section h2{font-size:38px;letter-spacing:-1.3px;line-height:1.1;margin:0 0 12px}.lead{color:var(--muted);max-width:700px;margin:0 auto}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.card{background:linear-gradient(145deg,#10192b,#0b1423);border:1px solid var(--line);border-radius:19px;padding:24px}.icon{width:42px;height:42px;display:grid;place-items:center;background:#171e42;border-radius:12px;font-size:20px}.card h3{margin:14px 0 7px}.card p{margin:0;color:var(--muted);font-size:14px}
+
+.modules{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:30px}.module{display:flex;gap:15px;align-items:flex-start}.num{font-weight:950;color:#858bff;font-size:12px;min-width:55px}.module p{color:var(--muted);margin:4px 0 0;font-size:14px}
+
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}.showcase img{width:100%;height:360px;object-fit:cover;border-radius:22px;border:1px solid var(--line)}.check{margin:13px 0;color:#cdd6e5}.check b{color:var(--green)}
+
+.offer{position:relative;overflow:hidden;background:linear-gradient(145deg,#171b49,#0d1730);border:1px solid #3b4385;border-radius:28px;padding:40px;text-align:center;box-shadow:0 30px 100px #0006}.offer:before{content:"";position:absolute;width:300px;height:300px;background:#6c5cff32;filter:blur(70px);top:-130px;right:-90px}.offer>*{position:relative}
+.offerbadge{display:inline-block;background:#252a65;color:#bfc4ff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:900}
+.old{text-decoration:line-through;color:#78859a;font-size:15px;margin-top:22px}.price{font-size:57px;font-weight:950;letter-spacing:-2px;margin:0}.price small{font-size:17px;letter-spacing:0}.install{color:#b8c4d8}.offer .btn{width:min(500px,100%);margin-top:18px;font-size:16px}
+.secure{font-size:12px;color:#9aa8bd;margin-top:12px}
+
+.bonus{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:30px}.bonus .card{border-color:#2a3961}
+.faq{max-width:800px;margin:30px auto}.faq details{background:#0d1627;border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:17px 19px}.faq summary{cursor:pointer;font-weight:800}.faq p{color:var(--muted);margin-bottom:0}
+
+.final{padding:85px 0}.finalbox{text-align:center;max-width:850px;margin:auto}.finalbox h2{font-size:44px;line-height:1.05}.finalbox p{color:var(--muted);font-size:17px}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:#77869e;font-size:12px}
+@media(max-width:850px){
+ .navlinks{display:none}.hero,.showcase{grid-template-columns:1fr}.hero{padding-top:55px}.mockimg{height:290px}
+ .features,.bonus{grid-template-columns:1fr}.modules{grid-template-columns:1fr}.proof{grid-template-columns:1fr}
+ .section{padding:55px 0}.offer{padding:28px 18px}.price{font-size:48px}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="container nav">
+<a class="logo" href="#">Code<span>Start</span></a>
+<div class="navlinks"><a href="#conteudo">O que você aprende</a><a href="#modulos">Módulos</a><a href="#oferta">Oferta</a><a href="#faq">Dúvidas</a></div>
+<a class="navbtn" href="#oferta">Quero aprender</a>
+</div>
+</nav>
+
+<header class="container hero">
+<div>
+<div class="eyebrow"><i></i> CURSO ONLINE • DO ZERO AO PRIMEIRO SITE</div>
+<h1>Aprenda a criar <span class="grad">sites profissionais</span> do zero.</h1>
+<p>Domine HTML, CSS e JavaScript através de aulas práticas, exemplos de código e um projeto completo. Mesmo que você nunca tenha programado.</p>
+<div class="cta">
+<a class="btn primary" href="#oferta">QUERO COMEÇAR AGORA →</a>
+<a class="btn secondary" href="#conteudo">Ver conteúdo</a>
+</div>
+<div class="guarantee">✓ Acesso ao conteúdo • ✓ Estudo no seu ritmo • ✓ Projeto prático</div>
+</div>
+<div class="hero-visual">
+<div class="glow"></div>
+<div class="mockup">
+<div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<div class="mockimg">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85" alt="Programação em computador">
+<div class="mockoverlay"></div>
+<div class="mocktext"><small>CODESTART</small><h3>Do primeiro código ao seu próprio site.</h3></div>
+</div>
+</div>
+</div>
+</header>
+
+<main>
+<section class="container proof">
+<div class="item"><b>HTML</b><span>Estruture páginas corretamente</span></div>
+<div class="item"><b>CSS</b><span>Crie layouts bonitos e responsivos</span></div>
+<div class="item"><b>JavaScript</b><span>Adicione interatividade ao site</span></div>
+</section>
+
+<section id="conteudo" class="section">
+<div class="container">
+<div class="section center"><h2>O que você vai aprender</h2><p class="lead">Um caminho organizado para sair do zero e entender como um site realmente é construído.</p></div>
+<div class="features">
+<div class="card"><div class="icon">⌨️</div><h3>HTML na prática</h3><p>Aprenda a criar a estrutura de páginas, títulos, textos, imagens, links, botões e formulários.</p></div>
+<div class="card"><div class="icon">🎨</div><h3>CSS profissional</h3><p>Trabalhe com cores, fontes, espaçamento, Flexbox, Grid, responsividade e componentes.</p></div>
+<div class="card"><div class="icon">⚡</div><h3>JavaScript</h3><p>Entenda lógica, funções, eventos e DOM para fazer seus sites reagirem às ações do usuário.</p></div>
+</div>
+</div>
+</section>
+
+<section id="modulos" class="section" style="background:#090f1c">
+<div class="container">
+<div class="section center"><h2>Conteúdo do curso</h2><p class="lead">12 módulos em uma sequência pensada para quem está começando.</p></div>
+<div class="modules">
+<div class="card module"><span class="num">01</span><div><h3>Como a Web funciona</h3><p>Navegador, servidor, internet, arquivos e páginas.</p></div></div>
+<div class="card module"><span class="num">02</span><div><h3>HTML do zero</h3><p>Tags, estrutura, textos, links, imagens e botões.</p></div></div>
+<div class="card module"><span class="num">03</span><div><h3>HTML semântico</h3><p>Organização profissional e acessível.</p></div></div>
+<div class="card module"><span class="num">04</span><div><h3>CSS essencial</h3><p>Cores, fontes, box model, bordas e espaçamento.</p></div></div>
+<div class="card module"><span class="num">05</span><div><h3>Flexbox e Grid</h3><p>Criação de layouts modernos.</p></div></div>
+<div class="card module"><span class="num">06</span><div><h3>Responsividade</h3><p>Sites que funcionam no celular e computador.</p></div></div>
+<div class="card module"><span class="num">07</span><div><h3>JavaScript</h3><p>Variáveis, funções, condições e lógica.</p></div></div>
+<div class="card module"><span class="num">08</span><div><h3>DOM e eventos</h3><p>Botões, interações e alterações na página.</p></div></div>
+<div class="card module"><span class="num">09</span><div><h3>Formulários</h3><p>Inputs, validações e interação.</p></div></div>
+<div class="card module"><span class="num">10</span><div><h3>Projeto completo</h3><p>Construção de uma landing page.</p></div></div>
+<div class="card module"><span class="num">11</span><div><h3>Git e publicação</h3><p>Versionamento e primeiros passos para publicar.</p></div></div>
+<div class="card module"><span class="num">12</span><div><h3>Próximos passos</h3><p>Como continuar evoluindo e criar portfólio.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container showcase">
+<div><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1000&q=85" alt="Desenvolvimento de um site"></div>
+<div><h2>Você aprende construindo.</h2><p class="lead" style="margin:0">A ideia não é decorar códigos. É entender para que cada tecnologia serve e usar o conhecimento em projetos.</p>
+<p class="check">✓ <b>Projeto final:</b> landing page completa</p>
+<p class="check">✓ <b>Prática:</b> exemplos de código para testar</p>
+<p class="check">✓ <b>Responsivo:</b> aprenda a adaptar para celular</p>
+<p class="check">✓ <b>Base sólida:</b> prepare-se para tecnologias mais avançadas</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="section center"><h2>🎁 O que você recebe</h2><p class="lead">Além das aulas, o material foi pensado para facilitar sua prática.</p></div>
+<div class="bonus">
+<div class="card"><h3>📖 Guia prático</h3><p>Conteúdo organizado em módulos para estudar sem se perder.</p></div>
+<div class="card"><h3>💻 Exemplos de código</h3><p>Trechos prontos para entender, testar e modificar.</p></div>
+<div class="card"><h3>🚀 Projeto final</h3><p>Um projeto completo para aplicar tudo que aprendeu.</p></div>
+</div>
+</div>
+</section>
+
+<section id="oferta" class="section">
+<div class="container">
+<div class="offer">
+<span class="offerbadge">OFERTA DE LANÇAMENTO</span>
+<h2>Comece hoje a criar seus próprios sites.</h2>
+<p class="lead">Tenha acesso ao curso CodeStart e siga o passo a passo para aprender programação web.</p>
+<div class="old">De R$ 59,90</div>
+<div class="price">R$ 29<small>,90</small></div>
+<div class="install">Pagamento único</div>
+<a class="btn primary" href="COLE_AQUI_SEU_LINK_DA_KIWIFY" onclick="return checkout(event)">QUERO GARANTIR MEU ACESSO →</a>
+<div class="secure">🔒 Pagamento processado com segurança • Acesso após a confirmação</div>
+</div>
+</div>
+</section>
+
+<section id="faq" class="section">
+<div class="container">
+<div class="section center"><h2>Perguntas frequentes</h2><p class="lead">As principais dúvidas antes de começar.</p></div>
+<div class="faq">
+<details><summary>Preciso saber programar?</summary><p>Não. O curso começa pelos fundamentos e foi organizado para iniciantes.</p></details>
+<details><summary>Preciso ter um computador?</summary><p>Para praticar programação com mais conforto, um computador é recomendado. Você também pode acompanhar a parte teórica pelo celular.</p></details>
+<details><summary>O curso ensina HTML, CSS e JavaScript?</summary><p>Sim. Essas são as três tecnologias centrais do curso.</p></details>
+<details><summary>Vou criar um site durante o curso?</summary><p>Sim. O projeto final reúne os conhecimentos aprendidos ao longo dos módulos.</p></details>
+<details><summary>Por quanto tempo terei acesso?</summary><p>Defina aqui a regra de acesso que você oferecerá na plataforma de pagamento.</p></details>
+</div>
+</div>
+</section>
+
+<section class="final">
+<div class="container finalbox">
+<h2>Seu primeiro site pode começar com uma única linha de código.</h2>
+<p>Comece pelos fundamentos, pratique e evolua um projeto de cada vez.</p>
+<a class="btn primary" href="#oferta">QUERO COMEÇAR →</a>
+</div>
+</section>
+</main>
+
+<footer><div class="container">© 2026 CodeStart. Todos os direitos reservados. • Esta página é uma apresentação do curso.</div></footer>
+
+<script>
+function checkout(e){
+  const href=e.currentTarget.getAttribute("href");
+  if(href==="COLE_AQUI_SEU_LINK_DA_KIWIFY"){
+    e.preventDefault();
+    alert("Coloque aqui o link do seu checkout da Kiwify. No código, procure por COLE_AQUI_SEU_LINK_DA_KIWIFY e substitua pelo seu link.");
+    return false;
+  }
+  return true;
+}
+</script>
+</body>
+  </html>
